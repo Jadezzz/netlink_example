@@ -51,7 +51,9 @@ int main()
     printf("Waiting for message from kernel\n");
 
     /* Read message from kernel */
+    memset(nlh, 0, NLMSG_SPACE(MAX_PAYLOAD)); 
+
     recvmsg(sock_fd, &msg, 0);
-    printf("Received message payload: %s\n", NLMSG_DATA(nlh));
+    printf("Received message payload: %s\n", (char*)NLMSG_DATA(nlh));
     close(sock_fd);
 }
